@@ -11,14 +11,20 @@ class ItemsController < ApplicationController
     render json: items, include: :user
   end
 
+  # def show
+  #   item = Item.find_by(id: params[:id])
+  #   if item.user_id == params[:user_id].to_i
+  #     render json: item
+  #   else
+  #     render json: {error: "Item not found"}, status: :not_found
+  #   end
+  # end
+
   def show
-    item = Item.find_by(id: params[:id])
-    if item.user_id == params[:user_id].to_i
-      render json: item
-    else
-      render json: {error: "Item not found"}, status: :not_found
-    end
+    item = Item.find(params[:id])
+    render json: item
   end
+
 
   def create
     user = User.find_by(id: params[:user_id])
